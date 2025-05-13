@@ -15,9 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Animated Text
   initAnimatedText()
 
-  // Contact Form
-  initContactForm()
-
   // Projects Horizontal Scrolling
   initProjectsScroll()
 
@@ -280,59 +277,6 @@ function initAnimatedText() {
 
   // Start animation on page load only
   startAnimation()
-
-  // Remove the mouseenter event listener to prevent animation on hover
-  // text.addEventListener("mouseenter", () => {
-  //   iteration = 0
-  //   startAnimation()
-  // })
-}
-
-// Contact Form
-function initContactForm() {
-  const form = document.getElementById("contact-form")
-
-  if (!form) return
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault()
-
-    // Get form data
-    const name = document.getElementById("name").value
-    const email = document.getElementById("email").value
-    const subject = document.getElementById("subject").value
-    const message = document.getElementById("message").value
-
-    // Here you would typically send the data to a server
-    console.log("Form submitted:", { name, email, subject, message })
-
-    // Show success message (in a real app, do this after successful submission)
-    alert("Thank you for your message! I'll get back to you soon.")
-
-    // Reset form
-    form.reset()
-  })
-}
-
-// Scroll Animations
-function initScrollAnimations() {
-  const sections = document.querySelectorAll("section")
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("fade-in")
-        }
-      })
-    },
-    { threshold: 0.1 },
-  )
-
-  sections.forEach((section) => {
-    section.style.opacity = "0"
-    observer.observe(section)
-  })
 }
 
 // Projects Horizontal Scrolling
@@ -443,10 +387,44 @@ function initProjectsScroll() {
   // Initialize
   updateNavButtons(0)
 
-  // Handle window resize
+  // Handle window resize - use a debounced version to avoid constant reloads
+  let resizeTimeout
   window.addEventListener("resize", () => {
-    // Recalculate values on resize
-    location.reload() // Simplest solution to recalculate everything
+    // Clear the timeout if it exists
+    if (resizeTimeout) {
+      clearTimeout(resizeTimeout)
+    }
+
+    // Set a new timeout
+    resizeTimeout = setTimeout(() => {
+      // Only reload if the width has changed significantly
+      const newWrapperWidth = projectsWrapper.offsetWidth
+      if (Math.abs(newWrapperWidth - wrapperWidth) > 50) {
+        // Recalculate values on significant resize
+        location.reload()
+      }
+    }, 500) // 500ms delay
+  })
+}
+
+// Scroll Animations
+function initScrollAnimations() {
+  const sections = document.querySelectorAll("section")
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("fade-in")
+        }
+      })
+    },
+    { threshold: 0.1 },
+  )
+
+  sections.forEach((section) => {
+    section.style.opacity = "0"
+    observer.observe(section)
   })
 }
 
