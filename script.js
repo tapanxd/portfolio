@@ -3,9 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Network Background
   initNetworkBackground()
 
-  // Remove custom cursor initialization
-  // initCustomCursor()
-
   // Mobile Menu
   initMobileMenu()
 
@@ -34,8 +31,12 @@ function initNetworkBackground() {
   const ctx = canvas.getContext("2d")
 
   // Set canvas size
-  canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
+  function setCanvasSize() {
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+  }
+
+  setCanvasSize()
 
   // Particle settings
   const particlesArray = []
@@ -61,11 +62,17 @@ function initNetworkBackground() {
   })
 
   // Handle window resize
+  let resizeTimeout = null
   window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-    numberOfParticles = getParticleCountByScreenSize()
-    init()
+    // Clear previous timeout
+    if (resizeTimeout) clearTimeout(resizeTimeout)
+
+    // Set new timeout to avoid multiple resize events
+    resizeTimeout = setTimeout(() => {
+      setCanvasSize()
+      numberOfParticles = getParticleCountByScreenSize()
+      init()
+    }, 250)
   })
 
   // Function to determine particle count based on screen size
@@ -203,11 +210,6 @@ function initNetworkBackground() {
   animate()
 }
 
-// Custom Cursor function is kept but not called
-function initCustomCursor() {
-  // Function kept for reference but not used
-}
-
 // Mobile Menu
 function initMobileMenu() {
   const menuBtn = document.querySelector(".mobile-menu-btn")
@@ -292,37 +294,64 @@ function initProjectsScroll() {
   const projectCards = document.querySelectorAll(".project-card")
   if (projectCards.length === 0) return
 
-  // Calculate card width including gap
-  const cardWidth = projectCards[0].offsetWidth
+  // Store initial values
+  let cardWidth = projectCards[0].offsetWidth
   const cardGap = 64 // This should match the gap in CSS (4rem)
-  const cardTotalWidth = cardWidth + cardGap
+  let wrapperWidth = projectsWrapper.offsetWidth
 
-  // Calculate how many cards can be visible at once - we want 1.5 cards
-  const wrapperWidth = projectsWrapper.offsetWidth
+  // Calculate how many cards can be visible at once
   const visibleCards = 1.5 // Show 1.5 cards at a time
 
   // Calculate scroll amount for each step (half a card)
-  const scrollStep = cardWidth / 2
+  let scrollStep = cardWidth / 2
 
-  // Calculate total number of pages (each step is half a card)
-  const totalSteps = projectCards.length * 2 - 1 // -1 because we start at 0
-  const totalPages = Math.ceil(totalSteps / 2) // Convert steps to pages
+  // Calculate total number of steps and pages
+  let totalSteps = projectCards.length * 2 - 1 // -1 because we start at 0
+  let totalPages = Math.ceil(totalSteps / 2) // Convert steps to pages
 
-  // Clear existing dots
-  paginationDotsContainer.innerHTML = ""
+  // Function to recalculate dimensions
+  function recalculateDimensions() {
+    // Get current dimensions
+    cardWidth = projectCards[0].offsetWidth
+    wrapperWidth = projectsWrapper.offsetWidth
 
-  // Create pagination dots
-  for (let i = 0; i < totalPages; i++) {
-    const dot = document.createElement("div")
-    dot.classList.add("dot")
-    if (i === 0) dot.classList.add("active")
-    dot.dataset.index = i
-    paginationDotsContainer.appendChild(dot)
+    // Recalculate scroll step
+    scrollStep = cardWidth / 2
 
-    dot.addEventListener("click", () => {
-      scrollToPage(i)
-    })
+    // Recalculate total steps and pages
+    totalSteps = projectCards.length * 2 - 1
+    totalPages = Math.ceil(totalSteps / 2)
+
+    // Update pagination dots
+    updatePaginationDots()
+
+    // Update current position
+    const currentStep = getCurrentStep()
+    updateActiveDot(Math.floor(currentStep / 2))
+    updateNavButtons(currentStep)
   }
+
+  // Function to update pagination dots
+  function updatePaginationDots() {
+    // Clear existing dots
+    paginationDotsContainer.innerHTML = ""
+
+    // Create pagination dots
+    for (let i = 0; i < totalPages; i++) {
+      const dot = document.createElement("div")
+      dot.classList.add("dot")
+      if (i === 0) dot.classList.add("active")
+      dot.dataset.index = i
+      paginationDotsContainer.appendChild(dot)
+
+      dot.addEventListener("click", () => {
+        scrollToPage(i)
+      })
+    }
+  }
+
+  // Initialize pagination dots
+  updatePaginationDots()
 
   // Navigation buttons
   prevButton.addEventListener("click", () => {
@@ -397,14 +426,48 @@ function initProjectsScroll() {
 
     // Set a new timeout
     resizeTimeout = setTimeout(() => {
-      // Only reload if the width has changed significantly
-      const newWrapperWidth = projectsWrapper.offsetWidth
-      if (Math.abs(newWrapperWidth - wrapperWidth) > 50) {
-        // Recalculate values on significant resize
-        location.reload()
-      }
-    }, 500) // 500ms delay
+      // Recalculate dimensions without reloading the page
+      recalculateDimensions()
+    }, 250) // 250ms delay
   })
+
+  // Add touch swipe support for mobile
+  let touchStartX = 0
+  let touchEndX = 0
+
+  projectsWrapper.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0].screenX
+    },
+    false,
+  )
+
+  projectsWrapper.addEventListener(
+    "touchend",
+    (e) => {
+      touchEndX = e.changedTouches[0].screenX
+      handleSwipe()
+    },
+    false,
+  )
+
+  function handleSwipe() {
+    const currentStep = getCurrentStep()
+    const swipeThreshold = 50 // Minimum distance to register as a swipe
+
+    if (touchStartX - touchEndX > swipeThreshold) {
+      // Swipe left - go to next
+      if (currentStep < totalSteps) {
+        scrollToStep(currentStep + 1)
+      }
+    } else if (touchEndX - touchStartX > swipeThreshold) {
+      // Swipe right - go to previous
+      if (currentStep > 0) {
+        scrollToStep(currentStep - 1)
+      }
+    }
+  }
 }
 
 // Scroll Animations
