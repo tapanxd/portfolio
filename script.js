@@ -42,7 +42,7 @@ function initNetworkBackground() {
 
   // Particle settings
   const particlesArray = []
-  const numberOfParticles = 100
+  let numberOfParticles = getParticleCountByScreenSize()
   const mouseRadius = 100
 
   // Mouse position
@@ -67,8 +67,24 @@ function initNetworkBackground() {
   window.addEventListener("resize", () => {
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
+    numberOfParticles = getParticleCountByScreenSize()
     init()
   })
+
+  // Function to determine particle count based on screen size
+  function getParticleCountByScreenSize() {
+    const width = window.innerWidth
+
+    if (width <= 480) {
+      return 30 // For very small mobile screens
+    } else if (width <= 768) {
+      return 50 // For mobile screens
+    } else if (width <= 1024) {
+      return 75 // For tablets
+    } else {
+      return 100 // For desktops
+    }
+  }
 
   // Particle class
   class Particle {
@@ -147,16 +163,19 @@ function initNetworkBackground() {
 
   // Connect particles with lines
   function connect() {
+    // Adjust connection distance based on screen size
+    const connectionDistance = window.innerWidth <= 768 ? 100 : 150
+
     for (let a = 0; a < particlesArray.length; a++) {
       for (let b = a; b < particlesArray.length; b++) {
         const dx = particlesArray[a].x - particlesArray[b].x
         const dy = particlesArray[a].y - particlesArray[b].y
         const distance = Math.sqrt(dx * dx + dy * dy)
 
-        if (distance < 150) {
+        if (distance < connectionDistance) {
           // Draw line between particles
           ctx.beginPath()
-          ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / 150})`
+          ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / connectionDistance})`
           ctx.lineWidth = 1
           ctx.moveTo(particlesArray[a].x, particlesArray[a].y)
           ctx.lineTo(particlesArray[b].x, particlesArray[b].y)
@@ -259,12 +278,14 @@ function initAnimatedText() {
     }, 30)
   }
 
+  // Start animation on page load only
   startAnimation()
 
-  text.addEventListener("mouseenter", () => {
-    iteration = 0
-    startAnimation()
-  })
+  // Remove the mouseenter event listener to prevent animation on hover
+  // text.addEventListener("mouseenter", () => {
+  //   iteration = 0
+  //   startAnimation()
+  // })
 }
 
 // Contact Form
