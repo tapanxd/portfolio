@@ -1,0 +1,19 @@
+# ---- Private working material. Never published. ------------------------------
+# Claude Code project settings and installed skills.
+.claude/
+
+# Source notes behind the site. portfolio-content.txt carries a phone number
+# and a candid do-not-claim list; the others are working references.
+portfolio-content.txt
+certificates.txt
+sample.html
+DESIGN.md
+
+# ---- Build output and dependencies (site/.gitignore also covers these) -------
+site/node_modules/
+site/dist/
+
+# ---- OS and editor -----------------------------------------------------------
+.DS_Store
+Thumbs.db
+*.swp

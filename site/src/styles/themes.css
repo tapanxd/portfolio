@@ -1,0 +1,102 @@
+/* ==========================================================================
+   THEME TOKENS
+   Four canonical palettes, swapped via [data-theme] on <html>.
+   Every colour on the site resolves through one of these variables. No
+   component hardcodes a hex value.
+
+   SHAPE LOCK:  border-radius is 0 everywhere. This is a drafting-document
+                aesthetic; rounded corners break it. Do not introduce a
+                radius scale without changing it globally.
+   ACCENT LOCK: exactly one accent per theme (--accent-primary). Used for
+                links, active states, primary buttons and semantic status.
+                No section introduces a second accent.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   THEME 1: EDITORIAL FOREST (default dark baseline)
+   Archival systems document, deep infrastructure atmosphere.
+   -------------------------------------------------------------------------- */
+[data-theme='forest'] {
+  --bg-canvas: #05170f;
+  --bg-surface: #0d1f17;
+  --bg-surface-elevated: #152d22;
+  --bg-surface-subtle: #081a11;
+  --border-hairline: #1c382b;
+  --border-strong: #2a523f;
+  --text-primary: #ede9dd;
+  --text-secondary: #9cb3a8;
+  --text-muted: #6b8a7c;
+  --accent-primary: #10b981;
+  --accent-hover: #34d399;
+  --accent-glow: rgb(16 185 129 / 0.15);
+  --accent-contrast: #05170f;
+  --badge-bg: #10291e;
+  --badge-text: #6ee7b7;
+  --grain-opacity: 0.035;
+}
+
+/* --------------------------------------------------------------------------
+   THEME 2: OXBLOOD AND WARM GOLD (executive dark monograph)
+   -------------------------------------------------------------------------- */
+[data-theme='oxblood'] {
+  --bg-canvas: #120a0d;
+  --bg-surface: #1b0e13;
+  --bg-surface-elevated: #29151d;
+  --bg-surface-subtle: #170c10;
+  --border-hairline: #351a24;
+  --border-strong: #4d2634;
+  --text-primary: #ede9dd;
+  --text-secondary: #b8a5ac;
+  --text-muted: #9a838b;
+  --accent-primary: #d4af37;
+  --accent-hover: #e5c158;
+  --accent-glow: rgb(212 175 55 / 0.15);
+  --accent-contrast: #120a0d;
+  --badge-bg: #2b1720;
+  --badge-text: #f3d47d;
+  --grain-opacity: 0.035;
+}
+
+/* --------------------------------------------------------------------------
+   THEME 3: OBSIDIAN AND RUST TERRACOTTA (industrial observability)
+   -------------------------------------------------------------------------- */
+[data-theme='obsidian'] {
+  --bg-canvas: #0d0e10;
+  --bg-surface: #17181c;
+  --bg-surface-elevated: #222429;
+  --bg-surface-subtle: #121316;
+  --border-hairline: #2e3138;
+  --border-strong: #444852;
+  --text-primary: #f3eee3;
+  --text-secondary: #a6a49e;
+  --text-muted: #85837b;
+  --accent-primary: #ea580c;
+  --accent-hover: #f97316;
+  --accent-glow: rgb(234 88 12 / 0.18);
+  --accent-contrast: #0d0e10;
+  --badge-bg: #291811;
+  --badge-text: #fb923c;
+  --grain-opacity: 0.04;
+}
+
+/* --------------------------------------------------------------------------
+   THEME 4: ARCHIVAL PAPER (editorial monograph light mode)
+   -------------------------------------------------------------------------- */
+[data-theme='paper'] {
+  --bg-canvas: #f2eee5;
+  --bg-surface: #faf7f2;
+  --bg-surface-elevated: #e8e3d8;
+  --bg-surface-subtle: #eae5da;
+  --border-hairline: #d3cbb9;
+  --border-strong: #a9a08b;
+  --text-primary: #111827;
+  --text-secondary: #1e293b;
+  --text-muted: #55606f;
+  --accent-primary: #1b5e3b;
+  --accent-hover: #268051;
+  --accent-glow: rgb(27 94 59 / 0.12);
+  --accent-contrast: #ffffff;
+  --badge-bg: #e0dacb;
+  --badge-text: #14472c;
+  --grain-opacity: 0.03;
+}

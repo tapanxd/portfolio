@@ -1,0 +1,181 @@
+/* Self-hosted variable fonts. Weight axis only, italic where the design uses it. */
+@import '@fontsource-variable/bodoni-moda/wght.css';
+@import '@fontsource-variable/bodoni-moda/wght-italic.css';
+@import '@fontsource-variable/inter/wght.css';
+@import '@fontsource-variable/jetbrains-mono/wght.css';
+
+@import 'tailwindcss';
+@import './themes.css';
+
+/* Map the theme variables onto Tailwind's semantic colour utilities.
+   `inline` keeps them referencing the live custom properties, so a theme
+   swap on <html> repaints without regenerating any classes. */
+@theme inline {
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-surface-elevated);
+  --color-subtle: var(--bg-surface-subtle);
+
+  --color-hairline: var(--border-hairline);
+  --color-strong: var(--border-strong);
+
+  --color-ink: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
+
+  --color-accent: var(--accent-primary);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-accent-glow: var(--accent-glow);
+
+  --color-badge: var(--badge-bg);
+  --color-badge-ink: var(--badge-text);
+
+  --font-serif: 'Bodoni Moda Variable', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter Variable', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Clears the sticky header when jumping to an anchor. */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--accent-primary);
+    color: var(--accent-contrast);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 3px;
+  }
+
+  /* The paper theme is a genuine light mode, so tell the UA about it. */
+  [data-theme='paper'] {
+    color-scheme: light;
+  }
+  [data-theme='forest'],
+  [data-theme='oxblood'],
+  [data-theme='obsidian'] {
+    color-scheme: dark;
+  }
+}
+
+@layer components {
+  /* Wide-tracked uppercase mono. The recurring label voice across the site:
+     section indices, metric units, stack tags, table headers. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Bodoni sits noticeably lighter than Inter at the same weight and needs
+     tighter tracking at display sizes to hold together. */
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    line-height: 0.98;
+  }
+}
+
+@layer utilities {
+  /* Faint drafting field. The mask direction is a variable so each section
+     can fade the texture where its content ends, instead of every section
+     reusing the hero's downward fade. Always non-interactive. */
+  .field-grid {
+    position: relative;
+  }
+  .field-grid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: radial-gradient(var(--border-hairline) 1px, transparent 1px);
+    background-size: 34px 34px;
+    -webkit-mask-image: var(--field-mask, linear-gradient(to bottom, black, transparent 70%));
+    mask-image: var(--field-mask, linear-gradient(to bottom, black, transparent 70%));
+  }
+
+  /* Fades upward, for a closing section. */
+  .field-rise {
+    --field-mask: linear-gradient(to top, black, transparent 70%);
+  }
+
+  /* Fades at both edges, so a short full-width block reads as a plate. */
+  .field-band {
+    --field-mask: linear-gradient(
+      to bottom,
+      transparent,
+      black 30%,
+      black 70%,
+      transparent
+    );
+  }
+
+  /* Italic Bodoni descenders (y g j p q) clip against a tight leading, so
+     pull-quotes get extra line box and bottom reserve. */
+  .quote-italic {
+    font-family: var(--font-serif);
+    font-style: italic;
+    line-height: 1.18;
+    padding-bottom: 0.15em;
+    /* Stops a single short word stranding on the last line once the viewport
+       is narrower than the tuned max-width. */
+    text-wrap: pretty;
+  }
+}
+
+/* Fixed, non-interactive film grain. Kept off scrolling containers so it
+   never triggers repaint work as the page moves. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Colour-only cross-fade when the theme switches. Transform and opacity are
+   left alone so Motion keeps sole ownership of those. */
+@media (prefers-reduced-motion: no-preference) {
+  body,
+  body *:not(svg):not(path) {
+    transition-property: background-color, border-color, color, fill, box-shadow;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

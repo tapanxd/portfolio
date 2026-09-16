@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="forest">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Tapan Panchal, Data Engineer</title>
+    <meta
+      name="description"
+      content="Databricks certified data engineer in Toronto. Lakehouse pipelines on Azure Databricks, data quality frameworks, and Spark cost tuning."
+    />
+    <meta name="author" content="Tapan Panchal" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tapan Panchal, Data Engineer" />
+    <meta
+      property="og:description"
+      content="Databricks certified data engineer in Toronto. Lakehouse pipelines on Azure Databricks, data quality frameworks, and Spark cost tuning."
+    />
+    <script>
+      // Applied before first paint so the chosen theme never flashes.
+      (function () {
+        try {
+          var t = localStorage.getItem('tp-theme')
+          var allowed = ['forest', 'oxblood', 'obsidian', 'paper']
+          if (t && allowed.indexOf(t) !== -1) {
+            document.documentElement.setAttribute('data-theme', t)
+          }
+        } catch (e) {
+          /* localStorage unavailable, keep the default theme */
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
