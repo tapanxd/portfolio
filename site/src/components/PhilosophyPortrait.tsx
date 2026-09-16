@@ -57,7 +57,7 @@ export function PhilosophyPortrait() {
           <div className="lg:col-span-7 lg:pt-2 xl:col-span-8">
             <Reveal>
               <span className="label text-accent">
-                01 <span className="text-muted">//</span> About
+                About
               </span>
             </Reveal>
 

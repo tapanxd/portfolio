@@ -83,25 +83,26 @@
    THEME 4: ARCHIVAL PAPER (editorial monograph light mode)
    -------------------------------------------------------------------------- */
 [data-theme='paper'] {
-  /* Canvas deep enough to read as stock, not screen. The card face sits a
-     clear step lighter so the hairline grid has real depth to work against. */
-  --bg-canvas: #ebe4d4;
-  --bg-surface: #f5f0e6;
-  --bg-surface-elevated: #ddd5c3;
-  --bg-surface-subtle: #e4dccb;
-  --border-hairline: #c7bda7;
-  --border-strong: #968a72;
-  /* Drafting ink: blue-black rather than neutral grey, so the type has an
-     identity against the warm paper instead of reading as default text. */
+  /* Old tapestry: a warm tan ground with visible weave, not a white page.
+     The card face sits a clear step lighter so the hairline grid has depth,
+     and the section band a step darker. */
+  --bg-canvas: #d9ceb5;
+  --bg-surface: #e9e1cf;
+  --bg-surface-elevated: #cbbfa3;
+  --bg-surface-subtle: #d0c4a9;
+  --border-hairline: #b4a687;
+  --border-strong: #8a7d63;
+  /* Drafting ink, blue-black, so the type has an identity on warm ground. */
   --text-primary: #151c2e;
-  --text-secondary: #2a3142;
-  --text-muted: #525a6b;
-  --accent-primary: #1b5e3b;
-  --accent-hover: #268051;
-  --accent-glow: rgb(27 94 59 / 0.12);
+  --text-secondary: #2b3040;
+  --text-muted: #444c5c;
+  /* Deeper than the dark themes' green so it clears AA on the darker band. */
+  --accent-primary: #175233;
+  --accent-hover: #1f6b43;
+  --accent-glow: rgb(23 82 51 / 0.14);
   --accent-contrast: #ffffff;
-  --badge-bg: #ddd5c2;
-  --badge-text: #14472c;
-  /* Paper wants visible grain. The dark themes hide most of theirs. */
-  --grain-opacity: 0.075;
+  --badge-bg: #cfc3a6;
+  --badge-text: #12402a;
+  /* Fabric wants coarse grain; the weave layer below adds the threads. */
+  --grain-opacity: 0.11;
 }

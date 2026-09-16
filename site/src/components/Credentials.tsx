@@ -63,7 +63,7 @@ export function Credentials() {
         <Reveal>
           <div className="flex flex-col gap-4">
             <span className="label text-accent">
-              06 <span className="text-muted">//</span> Credentials
+              Credentials
             </span>
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 className="display max-w-[20ch] text-3xl text-ink uppercase sm:text-4xl lg:text-[2.75rem]">

@@ -69,36 +69,6 @@ export function Reveal({
 }
 
 /**
- * Section index plus title. The numbered index is the site's wayfinding
- * system, matched one to one with the nav links, not decoration.
- */
-export function SectionHeading({
-  index,
-  title,
-  id,
-  className,
-}: {
-  index: string
-  title: string
-  id?: string
-  className?: string
-}) {
-  return (
-    <div className={cn('flex flex-col gap-4', className)}>
-      <span className="label text-accent" aria-hidden="true">
-        {index} <span className="text-muted">//</span> {title}
-      </span>
-      <h2
-        id={id}
-        className="display text-3xl leading-[1.02] text-ink sm:text-4xl lg:text-[2.75rem]"
-      >
-        {title}
-      </h2>
-    </div>
-  )
-}
-
-/**
  * Renders **bold** spans inside a data string. The only markup permitted in
  * copy, used to lift the figure out of a prose bullet so the eye finds it.
  */

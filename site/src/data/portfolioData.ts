@@ -27,7 +27,7 @@ export const portfolio: PortfolioContent = {
     name: 'Tapan Panchal',
     monogram: 'TP',
     title: 'Data Engineer',
-    roleTag: '// DATABRICKS + LAKEHOUSE',
+    roleTag: 'Databricks + Lakehouse',
     location: 'Toronto, Ontario, Canada',
     availability: 'AVAILABLE FOR DATA ENGINEERING ROLES ACROSS CANADA',
     availabilityShort: 'AVAILABLE ACROSS CANADA',
@@ -85,8 +85,8 @@ export const portfolio: PortfolioContent = {
       'The rest is throughput and cost, and most of it is unglamorous. Partition strategy, broadcast joins where the size ratio justifies them, and executors sized to the workload rather than to whatever the cluster was provisioned for. Average batch runtime fell 40 percent, and the cluster bill fell with it.',
     ],
     portraitCaption: {
-      top: 'TAPAN PANCHAL // DATA ENGINEER',
-      bottom: 'FIG 01.0 // TORONTO, ONTARIO',
+      top: 'Tapan Panchal, Data Engineer',
+      bottom: 'Toronto, Ontario',
     },
     metadata: [
       { label: 'Experience', value: '4 years on Azure Databricks and Delta Lake' },
@@ -98,7 +98,6 @@ export const portfolio: PortfolioContent = {
   caseStudies: [
     {
       id: 'ai-triage',
-      ref: 'ARCH-01',
       tag: 'AI TOOLING',
       title: 'The Databricks App that writes tickets',
       meta: 'Cavallo Technologies',
@@ -124,7 +123,6 @@ export const portfolio: PortfolioContent = {
     },
     {
       id: 'silent-failure',
-      ref: 'ARCH-02',
       tag: 'DATA QUALITY',
       title: 'Catching silent failure',
       meta: 'Cavallo Technologies',
@@ -150,7 +148,6 @@ export const portfolio: PortfolioContent = {
     },
     {
       id: 'spark-cost',
-      ref: 'ARCH-03',
       tag: 'PERFORMANCE',
       title: 'Making Spark cheaper',
       meta: 'Cavallo Technologies',
@@ -175,7 +172,6 @@ export const portfolio: PortfolioContent = {
     },
     {
       id: 'bank-migration',
-      ref: 'ARCH-04',
       tag: 'MIGRATION',
       title: 'Getting a bank off SQL Server',
       meta: 'Tata Consultancy Services',
@@ -200,7 +196,6 @@ export const portfolio: PortfolioContent = {
     },
     {
       id: 'api-ingestion',
-      ref: 'ARCH-05',
       tag: 'INTEGRATION',
       title: 'APIs you do not control',
       meta: 'Tata Consultancy Services',
@@ -224,7 +219,6 @@ export const portfolio: PortfolioContent = {
     },
     {
       id: 'unity-catalog',
-      ref: 'ARCH-06',
       tag: 'GOVERNANCE',
       title: 'Unity Catalog in daily use',
       meta: 'Cavallo Technologies',

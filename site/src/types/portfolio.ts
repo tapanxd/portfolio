@@ -21,9 +21,7 @@ export interface TelemetryMetric extends Stat {
 
 export interface CaseStudy {
   id: string
-  /** Archive index, e.g. "ARCH-01". */
-  ref: string
-  /** Domain tag shown beside the index, e.g. "AI TOOLING". */
+  /** Domain tag, e.g. "AI TOOLING". */
   tag: string
   title: string
   /** Where the work happened. */

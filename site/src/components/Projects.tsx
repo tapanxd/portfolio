@@ -8,22 +8,16 @@ import type { Project } from '../types/portfolio'
  * middle, stack and repositories on the right, so the section does not repeat
  * the card grid used by credentials.
  */
-function ProjectRow({ project, index }: { project: Project; index: number }) {
-  // Numbered across every group in page order, so inserting a project
-  // anywhere renumbers the rest instead of leaving a gap.
-  const ref = `P-${String(index).padStart(2, '0')}`
+function ProjectRow({ project }: { project: Project }) {
   return (
     <li className="grid grid-cols-1 gap-5 py-8 lg:grid-cols-12 lg:gap-8 lg:py-10">
       <div className="lg:col-span-4">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-          <span className="label text-accent">{ref}</span>
-          {project.inProgress && (
-            <span className="label border border-hairline px-2 py-1 text-muted">
-              In progress
-            </span>
-          )}
-        </div>
-        <h4 className="display mt-4 text-xl text-ink sm:text-2xl">{project.name}</h4>
+        <h4 className="display text-xl text-ink sm:text-2xl">{project.name}</h4>
+        {project.inProgress && (
+          <span className="label mt-3 inline-block border border-hairline px-2 py-1 text-muted">
+            In progress
+          </span>
+        )}
       </div>
 
       <div className="lg:col-span-5">
@@ -75,7 +69,7 @@ export function Projects() {
         <Reveal>
           <div className="flex flex-col gap-4">
             <span className="label text-accent">
-              03 <span className="text-muted">//</span> Projects
+              Projects
             </span>
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 className="display max-w-[20ch] text-3xl text-ink uppercase sm:text-4xl lg:text-[2.75rem]">
@@ -87,19 +81,16 @@ export function Projects() {
         </Reveal>
 
         <div className="mt-12 flex flex-col gap-12 lg:mt-16">
-          {projects.map((group, i) => {
-            const offset = projects.slice(0, i).reduce((n, g) => n + g.items.length, 0)
-            return (
-              <Reveal key={group.id} delay={i * 0.06}>
-                <RuledLabel>{group.name}</RuledLabel>
-                <ul className="divide-y divide-hairline border-b border-hairline">
-                  {group.items.map((project, j) => (
-                    <ProjectRow key={project.id} project={project} index={offset + j + 1} />
-                  ))}
-                </ul>
-              </Reveal>
-            )
-          })}
+          {projects.map((group, i) => (
+            <Reveal key={group.id} delay={i * 0.06}>
+              <RuledLabel>{group.name}</RuledLabel>
+              <ul className="divide-y divide-hairline border-b border-hairline">
+                {group.items.map((project) => (
+                  <ProjectRow key={project.id} project={project} />
+                ))}
+              </ul>
+            </Reveal>
+          ))}
         </div>
       </Container>
     </section>

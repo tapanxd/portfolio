@@ -3,11 +3,11 @@ import type { ThemeName } from '../types/portfolio'
 
 const STORAGE_KEY = 'tp-theme'
 
-export const THEMES: { id: ThemeName; index: string; name: string }[] = [
-  { id: 'forest', index: '01', name: 'Forest' },
-  { id: 'oxblood', index: '02', name: 'Oxblood' },
-  { id: 'obsidian', index: '03', name: 'Obsidian' },
-  { id: 'paper', index: '04', name: 'Paper' },
+export const THEMES: { id: ThemeName; name: string }[] = [
+  { id: 'forest', name: 'Forest' },
+  { id: 'oxblood', name: 'Oxblood' },
+  { id: 'obsidian', name: 'Obsidian' },
+  { id: 'paper', name: 'Paper' },
 ]
 
 const DEFAULT_THEME: ThemeName = 'forest'

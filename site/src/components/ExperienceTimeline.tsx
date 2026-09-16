@@ -47,7 +47,7 @@ function Row({
           {record.role}
         </h3>
         <p className="label mt-2 text-accent">
-          {record.organisation} <span className="text-muted">//</span> {record.location}
+          {record.organisation}, {record.location}
         </p>
       </div>
 
@@ -159,7 +159,7 @@ export function ExperienceTimeline() {
         <Reveal>
           <div className="flex flex-col gap-4">
             <span className="label text-accent">
-              05 <span className="text-muted">//</span> Career
+              Career
             </span>
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 className="display max-w-[20ch] text-3xl text-ink uppercase sm:text-4xl lg:text-[2.75rem]">

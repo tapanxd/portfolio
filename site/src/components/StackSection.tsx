@@ -65,7 +65,7 @@ export function StackSection() {
         <Reveal>
           <div className="flex flex-col gap-4">
             <span className="label text-accent">
-              04 <span className="text-muted">//</span> Stack
+              Stack
             </span>
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 className="display max-w-[20ch] text-3xl text-ink uppercase sm:text-4xl lg:text-[2.75rem]">
@@ -73,8 +73,7 @@ export function StackSection() {
               </h2>
               {/* Says what the two tiers mean, so neither reads as a rating. */}
               <span className="label text-muted">
-                Core, used daily <span className="text-hairline">//</span> Working, used
-                with context
+                Core is daily use. Working is used with context.
               </span>
             </div>
           </div>

@@ -64,10 +64,7 @@ export function CaseCard({
       )}
     >
       <div className={cn('flex flex-col bg-surface p-6 lg:p-8', isLead && 'lg:col-span-7')}>
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-          <span className="label text-accent">{study.ref}</span>
-          <span className="label text-muted">{study.tag}</span>
-        </div>
+        <span className="label text-accent">{study.tag}</span>
 
         <h3
           className={cn(
@@ -116,7 +113,7 @@ export function CaseStudies() {
         <Reveal>
           <div className="flex flex-col gap-4">
             <span className="label text-accent">
-              02 <span className="text-muted">//</span> Work
+              Work
             </span>
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <h2 className="display max-w-[20ch] text-3xl text-ink uppercase sm:text-4xl lg:text-[2.75rem]">
@@ -124,8 +121,7 @@ export function CaseStudies() {
               </h2>
               {/* Counted from the data, so it cannot drift out of date. */}
               <span className="label text-muted">
-                {featured.length} featured <span className="text-hairline">//</span>{' '}
-                {caseStudies.length} on file
+                {featured.length} featured, {caseStudies.length} on file
               </span>
             </div>
           </div>

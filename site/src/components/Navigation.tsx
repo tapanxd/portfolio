@@ -7,15 +7,15 @@ import { portfolio } from '../data/portfolioData'
 import { Container, Sheet } from './primitives'
 import { cn } from '../lib/cn'
 
-/** Section indices double as the nav labels, so both stay in one list. */
+/** One list drives both the desktop nav and the mobile drawer. */
 const NAV_SECTIONS = [
-  { index: '01', label: 'About', id: 'about' },
-  { index: '02', label: 'Work', id: 'work' },
-  { index: '03', label: 'Projects', id: 'projects' },
-  { index: '04', label: 'Stack', id: 'stack' },
-  { index: '05', label: 'Career', id: 'career' },
-  { index: '06', label: 'Credentials', id: 'credentials' },
-  { index: '07', label: 'Contact', id: 'contact' },
+  { label: 'About', id: 'about' },
+  { label: 'Work', id: 'work' },
+  { label: 'Projects', id: 'projects' },
+  { label: 'Stack', id: 'stack' },
+  { label: 'Career', id: 'career' },
+  { label: 'Credentials', id: 'credentials' },
+  { label: 'Contact', id: 'contact' },
 ] as const
 
 /** Accent over canvas per theme, so each swatch previews what it switches to. */
@@ -23,7 +23,7 @@ const SWATCHES: Record<string, { canvas: string; accent: string }> = {
   forest: { canvas: '#05170f', accent: '#10b981' },
   oxblood: { canvas: '#120a0d', accent: '#d4af37' },
   obsidian: { canvas: '#0d0e10', accent: '#ea580c' },
-  paper: { canvas: '#ebe4d4', accent: '#1b5e3b' },
+  paper: { canvas: '#d9ceb5', accent: '#175233' },
 }
 
 function ThemeSwitcher({ size = 'sm' }: { size?: 'sm' | 'lg' }) {
@@ -41,8 +41,8 @@ function ThemeSwitcher({ size = 'sm' }: { size?: 'sm' | 'lg' }) {
               type="button"
               role="radio"
               aria-checked={active}
-              aria-label={`${t.index} ${t.name} theme`}
-              title={`${t.index} ${t.name}`}
+              aria-label={`${t.name} theme`}
+              title={t.name}
               onClick={() => setTheme(t.id)}
               className={cn(
                 'grid cursor-pointer place-items-center border transition-transform active:scale-[0.92]',
@@ -139,7 +139,7 @@ export function Navigation() {
                   to={`/#${s.id}`}
                   className="label whitespace-nowrap text-secondary transition-colors hover:text-accent"
                 >
-                  <span className="text-muted">{s.index}</span> {s.label}
+                  {s.label}
                 </Link>
               ))}
             </nav>
@@ -193,7 +193,6 @@ export function Navigation() {
                     onClick={closeDrawer}
                     className="flex items-baseline gap-4 border-b border-hairline py-4 text-ink"
                   >
-                    <span className="label text-muted">{s.index}</span>
                     <span className="display text-2xl uppercase">{s.label}</span>
                   </Link>
                 ))}

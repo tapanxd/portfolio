@@ -36,8 +36,8 @@ export function WorkPage() {
               Case studies
             </h1>
             <p className="mt-6 max-w-[52ch] text-base leading-relaxed text-secondary lg:text-lg">
-              Seven pieces of work, each written as the problem that caused it, the
-              mechanism that fixed it, and what changed afterwards.
+              {caseStudies.length} pieces of work, each written as the problem that
+              caused it, the mechanism that fixed it, and what changed afterwards.
             </p>
           </Container>
         </section>
@@ -52,12 +52,9 @@ export function WorkPage() {
                 className="border-b border-hairline py-14 lg:py-20"
               >
                 <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
-                  {/* Left rail: the index card for this record. */}
+                  {/* Left rail: tag, client, readouts and stack. */}
                   <div className="lg:col-span-4">
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                      <span className="label text-accent">{study.ref}</span>
-                      <span className="label text-muted">{study.tag}</span>
-                    </div>
+                    <span className="label text-accent">{study.tag}</span>
 
                     <p className="label mt-5 text-secondary">{study.meta}</p>
 

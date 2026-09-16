@@ -89,7 +89,7 @@ export function ContactTerminal() {
           <div className="lg:col-span-6">
             <Reveal>
               <span className="label text-accent">
-                07 <span className="text-muted">//</span> Contact
+                Contact
               </span>
             </Reveal>
             <Reveal delay={0.06}>
