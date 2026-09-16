@@ -23,7 +23,7 @@ const SWATCHES: Record<string, { canvas: string; accent: string }> = {
   forest: { canvas: '#05170f', accent: '#10b981' },
   oxblood: { canvas: '#120a0d', accent: '#d4af37' },
   obsidian: { canvas: '#0d0e10', accent: '#ea580c' },
-  paper: { canvas: '#f2eee5', accent: '#1b5e3b' },
+  paper: { canvas: '#ebe4d4', accent: '#1b5e3b' },
 }
 
 function ThemeSwitcher({ size = 'sm' }: { size?: 'sm' | 'lg' }) {

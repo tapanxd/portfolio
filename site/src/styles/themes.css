@@ -83,20 +83,25 @@
    THEME 4: ARCHIVAL PAPER (editorial monograph light mode)
    -------------------------------------------------------------------------- */
 [data-theme='paper'] {
-  --bg-canvas: #f2eee5;
-  --bg-surface: #faf7f2;
-  --bg-surface-elevated: #e8e3d8;
-  --bg-surface-subtle: #eae5da;
-  --border-hairline: #d3cbb9;
-  --border-strong: #a9a08b;
-  --text-primary: #111827;
-  --text-secondary: #1e293b;
-  --text-muted: #55606f;
+  /* Canvas deep enough to read as stock, not screen. The card face sits a
+     clear step lighter so the hairline grid has real depth to work against. */
+  --bg-canvas: #ebe4d4;
+  --bg-surface: #f5f0e6;
+  --bg-surface-elevated: #ddd5c3;
+  --bg-surface-subtle: #e4dccb;
+  --border-hairline: #c7bda7;
+  --border-strong: #968a72;
+  /* Drafting ink: blue-black rather than neutral grey, so the type has an
+     identity against the warm paper instead of reading as default text. */
+  --text-primary: #151c2e;
+  --text-secondary: #2a3142;
+  --text-muted: #525a6b;
   --accent-primary: #1b5e3b;
   --accent-hover: #268051;
   --accent-glow: rgb(27 94 59 / 0.12);
   --accent-contrast: #ffffff;
-  --badge-bg: #e0dacb;
+  --badge-bg: #ddd5c2;
   --badge-text: #14472c;
-  --grain-opacity: 0.03;
+  /* Paper wants visible grain. The dark themes hide most of theirs. */
+  --grain-opacity: 0.075;
 }
